@@ -20,6 +20,7 @@ class EntitySpawner extends Node
       this.asteroidImage = new Image(128,128);
       this.asteroidImage.src = 'VisualAssets/Gameplay/Asteroid.png';
   }
+  //Spawns specific entity at a specific render layer and position.
   SpawnEntity(node,renderLayer,posX,posY)
   {
       node.x = posX;
@@ -31,7 +32,7 @@ class EntitySpawner extends Node
   {
       this.RandomSpawn(delta);
   }
-  RandomSpawn(delta)
+  RandomSpawn(delta) //The random enemy ship spawner.
   {
       difficulty+=0.1;
       if(this.stop)
@@ -54,14 +55,14 @@ class EntitySpawner extends Node
           }
           let randoX = 32+Math.floor(Math.random()*(c.width-64));
           let r = Math.floor(Math.random()*2);
-          if(this.spawnedAmount===30)
+          if(this.spawnedAmount===30) //Spawns a boss every 30 entities.
           {
               
               this.SpawnEntity(new Boss(0,128,this.enemyBossShipImage,6,10,this.enemyBossCollider),RenderLayers[1],randoX,-64);
           }
           else
           {
-            if(r<1)
+            if(r<1) //Here you can add more entities later.
             {
                 this.SpawnEntity(new Asteroid(0,128,this.asteroidImage,11,1,this.enemySmallCollider),RenderLayers[1],randoX,-64);
             }

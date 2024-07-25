@@ -1,4 +1,6 @@
-class Entity extends BaseNode2D
+//The masterfile for all custom nodes. Left this way due to lack of time.
+
+class Entity extends BaseNode2D //Basic entity with health.
 {
     hp;
     constructor(x,y,sprite,spriteStepsRatio,hp)
@@ -21,7 +23,7 @@ class Entity extends BaseNode2D
     {
         RenderLayers[this.renderLayerID].RemoveNode(this);
     }
-    DamageEntity(amount)
+    DamageEntity(amount) //Used for when something damages this entity.
     {
         //console.log("this gets damaged");
         this.hp-=amount;
@@ -30,7 +32,7 @@ class Entity extends BaseNode2D
             this.RemoveEntity();
         score++;
         let r = Math.random() * 20;
-        //console.log(r);
+        // if the Entity is killed it has a chance to spawn a random power up! 
         if(r<2)
         {
             entitySpawner.SpawnEntity(new PlusHP(0,0,hpPlusImg,1,itemCollider),RenderLayers[3],this.x,this.y);
@@ -45,7 +47,7 @@ class Entity extends BaseNode2D
         }
     }
 }
-class BackgroundEntity extends Entity 
+class BackgroundEntity extends Entity //Background entity, used for the scrolling background images.
 {
     bckSpeed;
     constructor(x,y,sprite,spriteStepsRatio,speed)
@@ -72,7 +74,7 @@ class BackgroundEntity extends Entity
     }
     exports = BackgroundEntity;
 }
-class Player extends Entity
+class Player extends Entity //The player entity.
 {
     shieldPower;
     shieldNode;
@@ -94,6 +96,7 @@ class Player extends Entity
     }
     Control(delta)
     {
+		//The ship's shield controls.
         if(this.shieldPower!==4)
         {
             this.shieldRecharge+=delta;
@@ -113,6 +116,7 @@ class Player extends Entity
                 this.shieldNode.hidden = true;
             }
         }
+		//Moves ship to the current mouse coordinates.
         super.ChangeXY(mouseCoords[0],this.y);
         //console.log(this.x+" "+this.y);
     }
@@ -120,7 +124,7 @@ class Player extends Entity
     {
         super.VisualUpdate(canvas);
     }
-    GetDrop()
+    GetDrop() //Updates UI after receiving a power up!
     {
         ui.UpdateUI(this);
     }
@@ -160,6 +164,7 @@ class Player extends Entity
     }
     exports = Player;
 }
+//Firebolt entity, used both by enemy and player's ships.
 class FireBolt extends Entity
 {
     direction;
@@ -289,6 +294,7 @@ class PlusShield extends PlusDrop
         }
     }
 }
+//The Fireball entity used for when a ship explodes or is hit by a firebolt
 class FireBall extends Entity
 {
     internalTimer;
@@ -320,7 +326,7 @@ class EnemyMovingOneDirection extends Entity
 {
     
 }
-class Enemy extends Entity
+class Enemy extends Entity //Base enemy.
 {
     internalTimer = 60;
     movementTimerX = 0;   
@@ -361,9 +367,10 @@ class Enemy extends Entity
             this.internalTimer =100;
             if(this.ammo===0)
             {
-                this.internalTimer = 200;
+                this.internalTimer = 200; //Change the value assigned here to be smaller if you want the ship to shoot more often.
             }
         }
+		//Predefined enemy movement
         this.movementTimerX+=0.1*delta;        
         this.movementTimerY+=0.05*delta;
 
@@ -388,7 +395,7 @@ class Enemy extends Entity
         this.y=y;
     }
 }
-class Boss extends Enemy
+class Boss extends Enemy //Special enemy with 3 cannons!
 {
     internalTimer = 80;
     ammo = 2;
@@ -501,7 +508,7 @@ class Boss extends Enemy
         }
     }
 }
-class Asteroid extends Enemy
+class Asteroid extends Enemy //Enemy which goes in a straight line and attacks only by hitting the player's ship.
 {
     canDamage;
     constructor(x,y,sprite,spriteStepsRatio,hp,collider)
@@ -541,11 +548,11 @@ class Asteroid extends Enemy
         
     }
 }
-class UIElement extends BaseNode2D
+class UIElement extends BaseNode2D //Can be expanded later if any UI specific functions are needed.
 {
     
 }
-class UI
+class UI //Main UI Controller.
 {
     hpMeter;
     healthNotches;
@@ -590,6 +597,7 @@ class UI
     }
     UpdateScore()
     {
+		//This does not seem to be working, do not mind.
         let ctx = RenderLayers[4].ctxcanvas;
         ctx.font = "48px serif";
         ctx.fillStyle = "white";

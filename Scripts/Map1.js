@@ -1,3 +1,5 @@
+//Loads map with specific ID. CURRENTLY ONLY "0" WORKS!
+//This function was cut in favor of randomly generated gameplay.
 function LoadMap(id)
 {
     var shipImage = new Image(128,128);

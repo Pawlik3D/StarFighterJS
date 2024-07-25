@@ -1,3 +1,4 @@
+//Class for creating a map.
 class Map
 {
     events;
@@ -29,6 +30,7 @@ class Map
         this.events = {};
     }
 }
+//Base Map Event type.
 class MapEvent
 {
     constructor()
@@ -39,6 +41,7 @@ class MapEvent
     }
     exports = MapEvent;
 }
+//Map Event responsible for spawning entities.
 class SpawnEvent extends MapEvent
 {
     node;
@@ -53,7 +56,7 @@ class SpawnEvent extends MapEvent
         this.node = node;
         this.layer = layer;
     }
-    ExecuteEvent()
+    ExecuteEvent() //Spawns entity defined in the constructor.
     {
         super.ExecuteEvent();
         entitySpawner.SpawnEntity(this.node,this.layer,this.x,this.y);

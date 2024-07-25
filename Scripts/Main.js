@@ -66,7 +66,7 @@ var fireRate = 10;
 var possibleFireSounds = ["laser4.mp3","laser6.mp3","laser9.mp3"];
 var sfxAudio = document.getElementById("sfx");
 var sfxAudio2 = document.getElementById("sfx2");
-
+//Make player shoot a firebolt.
 function FireABolt()
 {
     if(fireRate<=0)
@@ -92,8 +92,9 @@ function LowerMouse()
 var lastUpdate = Date.now();
 function Update()
 {
+	//all logic goes here, FRAME DEPENDENT!!
     var now = Date.now();
-    var delta = (now - lastUpdate)/10;
+    var delta = (now - lastUpdate)/10; //Calculated delta which can be used for making sure the game speed is proper on different displays.
     lastUpdate = now;
     if(document.hasFocus() )
      {
@@ -115,6 +116,7 @@ function Update()
 }
 function PhysicsUpdate()
 {
+	//All physics goes here. FRAME INDEPENDENT!
     //tConsole.innerHTML ="isUpdating"+timer;
     if(document.hasFocus() )
       {
@@ -127,6 +129,7 @@ function PhysicsUpdate()
 }
 function VisualUpdate()
 {
+	//Same as Update, but used only for Layers!
     context.clearRect(0, 0, c.width,c.height);
     RenderLayers.forEach((layer)=> 
     {
@@ -138,6 +141,7 @@ function VisualUpdate()
     requestAnimationFrame(VisualUpdate);
           
 }
+//Finds the position of the mouse.
 function findMouseCoords(mouseEvent)
 {
   var obj = c;
