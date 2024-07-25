@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gra Bartłomiej pawlik</title>
+        <link rel="icon" type="image/x-icon" href="VisualAssets/Menu/Icon.png">
+  </head>
+  
+  <body id="body" style="background-color: black; display: flex; align-items: center;
+  justify-content: space-around; flex-direction:column;">
+          <img src="VisualAssets/Gameplay/Splash.png" alt="Spaceship">
+           <a href="Game.html">
+          <img src="VisualAssets/Menu/PlayGameButton.png" alt="PlayGame">
+          </a>
+          <a href="HelpScreen.html">
+          <img src="VisualAssets/Menu/HelpButton.png" alt="Help">
+          </a>
+          <audio id="audio" loop  src="Audio/ST/through space.ogg"></audio>
+              <script>
+                  let b = document.getElementById("body");
+                    b.addEventListener("click",play);
+                  function play()
+                  {
+                    let audio = document.getElementById("audio");
+                    audio.play();
+                  }
+              </script>
+  </body>
+</html>

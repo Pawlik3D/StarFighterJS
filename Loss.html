@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/html.html to edit this template
+-->
+<html>
+    <head>
+        <title>Scoreboard</title>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/x-icon" href="VisualAssets/Menu/Icon.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="body" style="background-color: black; display: flex; align-items: center;
+  justify-content: space-around; flex-direction:column;">
+        <div id="scoreBoard" style="color:white">Sorgi u lost</div>        
+        <div id="highScore" style="color:white">Sorgi u lost</div>
+          <img src="VisualAssets/Gameplay/Splash.png" alt="Spaceship">
+         <a href="Index.html">
+          <img src="VisualAssets/Menu/MENU.png" alt="Go back to menu">
+          </a>
+          <audio id="audio" loop  src="Audio/ST/Space Sprinkles.mp3"></audio>
+        <script>
+        var item = window.localStorage.getItem("score");
+        let score = document.getElementById('scoreBoard');
+        let highScore = document.getElementById('highScore');
+        score.innerHTML = "GRATULACJE! Twój nowy wyink to: "+item+" punktów!";
+        let hS = window.localStorage.getItem("hScore");
+        if(hS===null || hS<=0 || hS<item)
+        {
+            hS = item;
+            window.localStorage.setItem("hScore",item);
+            highScore.innerHTML = "Twój najwyższy wynik to "+item+" punktów!";
+        }
+        else
+        highScore.innerHTML = "Twój najwyższy wynik to "+hS+" punktów!";
+        let b = document.getElementById("body");
+        b.addEventListener("click",play);
+        function play()
+        {
+          let audio = document.getElementById("audio");
+          audio.play();
+        }
+        </script>
+    </body>
+</html>
